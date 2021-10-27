@@ -2,11 +2,21 @@ package com.company.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.company.data.FakeTransactions;
 import com.company.entity.Transaction;
 
+@Service
 public class RewardsService {
 	
-	public Integer calculateTotalRewards(List<Transaction> allTransactions) {
+	@Autowired
+	FakeTransactions fakeTransactions;
+	
+	public Integer calculateTotalRewards(String email) {
+		
+		List<Transaction> allTransactions = fakeTransactions.getTransactions(email);
 	
 		Integer total = 0;
 		
@@ -26,13 +36,14 @@ public class RewardsService {
 		return total;
 	}
 	
-	public Integer calculateRewardsForMonth(List<Transaction> allTransactions, Integer month) {
-		
+	public Integer calculateRewardsForMonth(String email, String month) {	
+
+		List<Transaction> allTransactions = fakeTransactions.getTransactions(email);
 		Integer total = 0;
 		
 		for (Transaction transaction : allTransactions) {
 			
-			if (transaction.getTransactionDate().getMonth() == month) {
+			if (transaction.getTransactionDate().getMonth().equals(month)) {
 						
 				Integer transactionAmount = transaction.getTransactionAmount().intValue();
 				

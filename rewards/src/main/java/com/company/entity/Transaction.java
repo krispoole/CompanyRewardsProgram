@@ -1,44 +1,25 @@
 package com.company.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="transaction")
 public class Transaction {
-	
-	@Id
-	@Column(name="transaction_id")
-	private Integer transactionId;
-	
-	@Column(name="transaction_date")
-	private Date transactionDate;
-	
-	@Column(name="transaction_amount")
+
+	private LocalDate transactionDate;
 	private Double transactionAmount;
-	
-	@Column(name="customer_id")
 	private Integer customerId;
-	
-	public Transaction() {}
 
-	public Integer getTransactionId() {
-		return transactionId;
-	}
-	
-	public void setTransactionId(Integer transactionId) {
-		this.transactionId = transactionId;
+	public Transaction(LocalDate transactionDate, Double transactionAmount, Integer customerId) {
+		super();
+		this.transactionDate = transactionDate;
+		this.transactionAmount = transactionAmount;
+		this.customerId = customerId;
 	}
 
-	public Date getTransactionDate() {
+	public LocalDate getTransactionDate() {
 		return transactionDate;
 	}
 
-	public void setTransactionDate(Date transactionDate) {
+	public void setTransactionDate(LocalDate transactionDate) {
 		this.transactionDate = transactionDate;
 	}
 
@@ -57,6 +38,5 @@ public class Transaction {
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
-	
 	
 }
