@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.company.entity.Rewards;
 import com.company.service.RewardsService;
 
 @CrossOrigin
@@ -19,19 +20,21 @@ public class CustomerRewardsController {
 	RewardsService rewardService;
 	
 	@RequestMapping(value = "/retrieve-customer-rewards-total", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-	public ResponseEntity<Integer> retrieveTotalRewards(String email){
+	public ResponseEntity<Rewards> retrieveTotalRewards(String email){
 		
-		Integer total = rewardService.calculateTotalRewards(email);
+		Rewards rewards = rewardService.calculateTotalRewards(email);
 		
-		return new ResponseEntity<>(total, HttpStatus.OK);
+		return new ResponseEntity<>(rewards, HttpStatus.OK);
 	}
 	
+//	Input value for month is numerical value starting with January = 0;
+	
 	@RequestMapping(value = "/retrieve-customer-rewards-by-month", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-	public ResponseEntity<Integer> retrieveRewardsByMonth(String email, String month){
+	public ResponseEntity<Rewards> retrieveRewardsByMonth(String email, int month){
 		
-		Integer total = rewardService.calculateRewardsForMonth(email, month);
+		Rewards rewards = rewardService.calculateRewardsForMonth(email, month);
 		
-		return new ResponseEntity<>(total, HttpStatus.OK);
+		return new ResponseEntity<>(rewards, HttpStatus.OK);
 	}
 	
 }
